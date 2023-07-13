@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import './App.css'
-import TasksList from "./components/TasksLists/TasksList";
-import TasksItem from "./components/TasksItem/TasksItem";
+import Days from './components/Days/Days.jsx'
 
 function App() {
 	
@@ -51,10 +50,12 @@ function App() {
 	
 	return (
 		<div className='App'>
+			<header>
 			<h1 style={{ textAlign: 'center', marginTop: '10px', fontWeight: 'normal'  }}>Список задач</h1>
 			<button className="btn_addNewTask">Добавить задачу</button>
-			<TasksList props={tasks} />
-    	</div>
+			</header>
+			<Days props={tasks} />
+		</div>
   	);
 }
 
