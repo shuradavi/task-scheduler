@@ -1,18 +1,18 @@
 import React from 'react';
 import Day from '../Day/Day';
 
-const TasksList = ({ props }) => {
+const TasksList = ({ props, deleteTask }) => {
 
 	
 	return (
 		<div className='week-container'>
-			<Day props={props} day='Понедельник' />
-			<Day props={props} day='Вторник'/>
-			<Day props={props} day='Среда'/>
-			<Day props={props} day='Четверг'/>
-			<Day props={props} day='Пятница'/>
-			<Day props={props} day='Суббота'/>
-			<Day props={props} day='Воскресенье'/>
+			<Day props={props} deleteTask={deleteTask} day='Понедельник' />
+			<Day props={props} deleteTask={deleteTask} day='Вторник'/>
+			<Day props={props} deleteTask={deleteTask} day='Среда'/>
+			<Day props={props} deleteTask={deleteTask} day='Четверг'/>
+			<Day props={props} deleteTask={deleteTask} day='Пятница'/>
+			<Day props={props} deleteTask={deleteTask} day='Суббота'/>
+			<Day props={props} deleteTask={deleteTask} day='Воскресенье'/>
 		</div>
 	);
 };

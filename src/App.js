@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import './App.css'
 import Days from './components/Days/Days.jsx'
+import MyModal from "./components/MyModal/MyModal";
+import TaskForm from "./components/TaskForm/TaskForm";
 
 function App() {
 	
@@ -29,13 +31,19 @@ function App() {
 			dayForTheWeek: 'Пятница',
 			weight: 1,
 		},
-	])
+	]);
 
-	// addTask(() => {
-	// })
+	const [modal, setModal] = useState(false)
+	
 
-	// deleteTask((id) => {
-	// })
+	const createTask = ((newTask) => {
+		setTasks([...tasks, newTask])
+		setModal(false)
+	})
+
+	const deleteTask = ((task) => {
+		setTasks(tasks.filter(t => t.id !== task.id))
+	})
 
 	// toggleTask((id) => {
 	// })
@@ -52,9 +60,12 @@ function App() {
 		<div className='App'>
 			<header>
 			<h1 style={{ textAlign: 'center', marginTop: '10px', fontWeight: 'normal'  }}>Список задач</h1>
-			<button className="btn_addNewTask">Добавить задачу</button>
+			<button className="btn_addNewTask" onClick={() => setModal(true)}>Добавить задачу</button>
+			<MyModal visible={modal} setVisible={setModal}>
+					<TaskForm create={createTask} />
+			</MyModal>
 			</header>
-			<Days props={tasks} />
+			<Days props={tasks} deleteTask={deleteTask} />
 		</div>
   	);
 }

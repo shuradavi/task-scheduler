@@ -1,14 +1,14 @@
 import React from 'react';
 import TasksItem from '../TasksItem/TasksItem';
 
-const Day = ({ props, day }) => {
+const Day = ({ props, day, deleteTask }) => {
 
 	let sortedTasks = props.filter((obj) => (obj.dayForTheWeek === day));
 
 	return (
 		<div className='day-container'>
-			{Boolean(sortedTasks.length) ? <div className='day'>{sortedTasks[0].dayForTheWeek}</div> : <div className='day'>{day}</div>}
-			<TasksItem props={sortedTasks} />
+			<div className='day'>{day}</div>
+			<TasksItem tasksList={sortedTasks} deleteTask={deleteTask} />
 		</div>
 	);
 };
