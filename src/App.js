@@ -35,16 +35,15 @@ function App() {
 	]);
 	const [modal, setModal] = useState(false)
 
-	const createTask = ((newTask) => {
+	const createTask = (newTask) => {
 		setTasks([...tasks, newTask])
 		setModal(false)
-	})
-	const deleteTask = ((task) => {
+	}
+	const deleteTask = (task) => {
 		setTasks(tasks.filter(t => t.id !== task.id))
-	})
+	}
 
-	const toggleTask = ((id) => {
-		console.log(`toggleTask Done`)
+	const toggleTask = (id) => {
 		const idx = tasks.findIndex(task => task.id === id)
 		const newTaskState = [...tasks];
 
@@ -55,12 +54,12 @@ function App() {
 			newTaskState[idx] = { ...newTaskState[idx], isDone: false }
 		}
 		setTasks(newTaskState)
-	})
+	}
 
 
-	// changeTask((id, fields) => {
-
-	// })
+	const changeTask = (id, fields) => {
+		console.log('change CLICKED');
+	};
 
 	// postponeTask((id) => {})
 	
@@ -74,8 +73,9 @@ function App() {
 			<MyModal visible={modal} setVisible={setModal}>
 					<TaskForm create={createTask} />
 			</MyModal>
+			<MyModal></MyModal>	
 			</header>
-			<Days props={tasks} deleteTask={deleteTask} toggleTask={toggleTask} />
+			<Days props={tasks} deleteTask={deleteTask} toggleTask={toggleTask} changeTask={changeTask} />
 			<Results tasks={tasks}  />
 		</div>
   	);

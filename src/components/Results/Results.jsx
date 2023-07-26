@@ -3,8 +3,8 @@ import React from 'react';
 const Results = ({ tasks }) => {
 	let closeSum = 0;
 	if (tasks) {
-		closeSum = tasks.filter(task => task.isDone === true).
-			reduce((acc, task) => acc + task.weight, 0)
+		closeSum = tasks.filter(task => task.isDone === true)
+			.reduce((acc, task) => acc + task.weight, 0)
 	}
 
 	return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TasksItem = ({ tasksList, deleteTask, toggleTask }) => {
+const TasksItem = ({ tasksList, deleteTask, toggleTask, changeTask }) => {
 
 	
 	return (
@@ -12,7 +12,8 @@ const TasksItem = ({ tasksList, deleteTask, toggleTask }) => {
 							(<span className='task-active'>{`${tasksList.indexOf(task) + 1}. ${task.title}`}</span>)
 							:
 							(<span className='task-done'>{`${tasksList.indexOf(task) + 1}. ${task.title}`}</span>)}
-							<button className='delete-btn' onClick={(e) => { e.stopPropagation(); deleteTask(task) }}>Удалить</button>
+						<button className='edit-btn' onClick={(e) => { e.stopPropagation(); changeTask(task.id) }}>Редактировать</button>
+						<button className='delete-btn' onClick={(e) => { e.stopPropagation(); deleteTask(task) }}>Удалить</button>
 				</div>
 			))
 			}
