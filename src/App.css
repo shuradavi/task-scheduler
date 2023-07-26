@@ -74,7 +74,7 @@ header {
 	border: 1px solid rgba(16, 37, 20, 0.377);
 }
 
-.delete-btn {
+.postpone-btn {
 	cursor: pointer;
 	display: flex;
 	justify-content: center;

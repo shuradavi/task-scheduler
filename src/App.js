@@ -58,10 +58,16 @@ function App() {
 
 
 	const changeTask = (id, fields) => {
-		console.log('change CLICKED');
+		console.log(tasks.filter(t => t.id === id))
+	
 	};
 
-	// postponeTask((id) => {})
+	const postponeTask = (id) => {
+		const index = tasks.findIndex(task => task.id === id)
+		const postponed = [...tasks];
+		postponed[index] = { ...postponed[index], dayForTheWeek: 'Отложенные' }
+		setTasks(postponed)
+	}
 	
 
 	
@@ -73,9 +79,8 @@ function App() {
 			<MyModal visible={modal} setVisible={setModal}>
 					<TaskForm create={createTask} />
 			</MyModal>
-			<MyModal></MyModal>	
 			</header>
-			<Days props={tasks} deleteTask={deleteTask} toggleTask={toggleTask} changeTask={changeTask} />
+			<Days props={tasks} deleteTask={deleteTask} toggleTask={toggleTask} changeTask={changeTask} postponeTask={postponeTask} />
 			<Results tasks={tasks}  />
 		</div>
   	);
