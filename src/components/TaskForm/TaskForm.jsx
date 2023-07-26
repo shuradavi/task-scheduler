@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 const TaskForm = ({create}) => {
-	const [task, setTask] = useState({title: '', description: '', dayForTheWeek: '', weight: ''})
+	const [task, setTask] = useState({title: '', description: '', dayForTheWeek: '', weight: '', isDone: false,})
 	
 	const addTask = (e) => {
 		e.preventDefault()
@@ -9,8 +9,7 @@ const TaskForm = ({create}) => {
 			...task, id: Date.now()
 		}
 		create(newTask);
-		setTask({ title: '', description: '', dayForTheWeek: '', weight: '' })
-		
+		setTask({ title: '', description: '', dayForTheWeek: '', weight: '', isDone: false, })	
 	}
 
 	return (
@@ -32,7 +31,7 @@ const TaskForm = ({create}) => {
 			<input
 				className='addTask-input'
 				value={task.dayForTheWeek}
-				onChange={e => setTask({ ...task, dayForTheWeek: e.target.value })}
+				onChange={e => setTask({ ...task, dayForTheWeek: e.target.value.trim() })}
 				type='text'
 				placeholder='День недели'
 			/>

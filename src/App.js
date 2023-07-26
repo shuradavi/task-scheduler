@@ -3,6 +3,7 @@ import './App.css'
 import Days from './components/Days/Days.jsx'
 import MyModal from "./components/MyModal/MyModal";
 import TaskForm from "./components/TaskForm/TaskForm";
+import Results from "./components/Results/Results";
 
 function App() {
 	
@@ -11,7 +12,7 @@ function App() {
 			id: 'zxcv1123',
 			title: 'Забрать доставку',
 			description: 'Пункт WB ул. Столичная д.1, Чехол для телефона КОД 123321',
-			isDone: 'false',
+			isDone: false,
 			dayForTheWeek: 'Понедельник',
 			weight: 1,
 		},
@@ -19,7 +20,7 @@ function App() {
 			id: 'zxcv11111',
 			title: 'Заказать пиццу',
 			description: 'Joys Pizza',
-			isDone: 'false',
+			isDone: false,
 			dayForTheWeek: 'Понедельник',
 			weight: 1,
 		},
@@ -27,26 +28,35 @@ function App() {
 			id: 'zxcv11333',
 			title: 'Собрать вещи',
 			description: 'Щетка, паста, шорты, футболка',
-			isDone: 'false',
+			isDone: false,
 			dayForTheWeek: 'Пятница',
 			weight: 1,
 		},
 	]);
-
 	const [modal, setModal] = useState(false)
-	
-
 	const createTask = ((newTask) => {
 		setTasks([...tasks, newTask])
 		setModal(false)
 	})
-
 	const deleteTask = ((task) => {
 		setTasks(tasks.filter(t => t.id !== task.id))
 	})
 
-	// toggleTask((id) => {
-	// })
+	const toggleTask = ((id) => {
+		console.log(`toggleTask Done`)
+		const idx = tasks.findIndex(task => task.id === id)
+		const newTaskState = [...tasks];
+
+		(newTaskState[idx].isDone === false ?
+			newTaskState[idx] = { ...newTaskState[idx], isDone: true }
+			:
+			newTaskState[idx] = { ...newTaskState[idx], isDone: false }
+		)
+		setTasks(newTaskState)
+		console.log(tasks[idx].isDone);
+	})
+	
+
 
 	// changeTask((id, fields) => {
 
@@ -65,7 +75,8 @@ function App() {
 					<TaskForm create={createTask} />
 			</MyModal>
 			</header>
-			<Days props={tasks} deleteTask={deleteTask} />
+			<Days props={tasks} deleteTask={deleteTask} toggleTask={toggleTask} />
+			<Results />
 		</div>
   	);
 }

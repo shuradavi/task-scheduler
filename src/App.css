@@ -5,7 +5,8 @@
 }
 
 header {
-	background-color: rgba(16, 37, 20, 0.377);
+	user-select: none;
+	background-color: rgba(16, 37, 20, 0.376);
 }
 .btn_addNewTask {
 	position: absolute;
@@ -42,6 +43,7 @@ header {
 }
 
 .day {
+	user-select: none;
 	border-bottom: solid 1px black;
 }
 
@@ -50,9 +52,19 @@ header {
 }
 
 .task {
+	user-select: none;
 	margin: 5px 10px 5px 10px;
 	display: flex;
 	justify-content: space-between;
+}
+
+.task-active {
+	cursor: pointer;
+}
+
+.task-done {
+	cursor: pointer;
+	text-decoration: line-through;
 }
 
 .addTask-input {
@@ -63,7 +75,18 @@ header {
 }
 
 .delete-btn {
+	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.results {
+	margin-top: 10px;
+	margin-left: 10px;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+	border: solid 2px rgba(16, 37, 20, 0.376);
+	width: max-content;
 }
