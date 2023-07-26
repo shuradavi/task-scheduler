@@ -34,6 +34,8 @@ function App() {
 		},
 	]);
 	const [modal, setModal] = useState(false)
+	const [closedTasks, setClosedTasks] = useState([])
+
 	const createTask = ((newTask) => {
 		setTasks([...tasks, newTask])
 		setModal(false)
@@ -47,15 +49,17 @@ function App() {
 		const idx = tasks.findIndex(task => task.id === id)
 		const newTaskState = [...tasks];
 
-		(newTaskState[idx].isDone === false ?
+		if (newTaskState[idx].isDone === false) {
 			newTaskState[idx] = { ...newTaskState[idx], isDone: true }
-			:
+			setClosedTasks([...closedTasks, newTaskState[idx]])
+		}
+		else {
 			newTaskState[idx] = { ...newTaskState[idx], isDone: false }
-		)
+			setClosedTasks(closedTasks.filter((item) => item.id !== newTaskState[idx].id))
+		}
 		setTasks(newTaskState)
-		console.log(tasks[idx].isDone);
 	})
-	
+	console.log(`Closed tasks: ${closedTasks}`);
 
 
 	// changeTask((id, fields) => {
@@ -76,7 +80,7 @@ function App() {
 			</MyModal>
 			</header>
 			<Days props={tasks} deleteTask={deleteTask} toggleTask={toggleTask} />
-			<Results />
+			<Results closedTasks={ closedTasks }  />
 		</div>
   	);
 }

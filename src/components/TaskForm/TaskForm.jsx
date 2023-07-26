@@ -9,7 +9,7 @@ const TaskForm = ({create}) => {
 			...task, id: Date.now()
 		}
 		create(newTask);
-		setTask({ title: '', description: '', dayForTheWeek: '', weight: '', isDone: false, })	
+		setTask({ title: '', description: '', dayForTheWeek: '', weight: 0, isDone: false, })	
 	}
 
 	return (
@@ -38,7 +38,7 @@ const TaskForm = ({create}) => {
 			<input
 				className='addTask-input'
 				value={task.weight}
-				onChange={e => setTask({ ...task, weight: e.target.value })}
+				onChange={e => setTask({ ...task, weight: Number(e.target.value) })}
 				type='text'
 				placeholder='Ценность задачи'
 			/>
