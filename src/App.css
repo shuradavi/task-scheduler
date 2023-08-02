@@ -80,12 +80,30 @@ header {
 	justify-content: center;
 	align-items: center;
 }
+
 .edit-btn {
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
+.delete-btn {
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn-wrapper {
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+	margin: 5px 10px;
+}
+
 .results {
 	margin-top: 10px;
 	margin-left: 10px;

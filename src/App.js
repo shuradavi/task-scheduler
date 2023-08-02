@@ -4,6 +4,7 @@ import Days from './components/Days/Days.jsx'
 import MyModal from "./components/MyModal/MyModal";
 import TaskForm from "./components/TaskForm/TaskForm";
 import Results from "./components/Results/Results";
+import EditForm from "./components/EditForm/EditForm";
 
 function App() {
 	
@@ -33,7 +34,11 @@ function App() {
 			weight: 1,
 		},
 	]);
-	const [modal, setModal] = useState(false)
+	const [modal, setModal] = useState(false);
+	const [editModal, setEditModal] = useState(false);
+	const [changes, setChanges] = useState({ title: '', description: '', dayForTheWeek: '', weight: 0, isDone: false, });
+	
+
 
 	const createTask = (newTask) => {
 		setTasks([...tasks, newTask])
@@ -57,10 +62,18 @@ function App() {
 	}
 
 
-	const changeTask = (id, fields) => {
-		console.log(tasks.filter(t => t.id === id))
-	
+	const editTask = (id) => {
+		setChanges(tasks.filter(task => task.id === id)[0])
+		setEditModal(true)
 	};
+
+	const onChangeHandler = (newValue) => {
+		const idx = tasks.findIndex(task => task.id === newValue.id)
+		const newTaskValue = [...tasks];
+		newTaskValue[idx] = newValue;
+		setTasks(newTaskValue)
+		setEditModal(false)
+	}
 
 	const postponeTask = (id) => {
 		const index = tasks.findIndex(task => task.id === id)
@@ -68,9 +81,8 @@ function App() {
 		postponed[index] = { ...postponed[index], dayForTheWeek: 'Отложенные' }
 		setTasks(postponed)
 	}
-	
 
-	
+
 	return (
 		<div className='App'>
 			<header>
@@ -79,8 +91,11 @@ function App() {
 			<MyModal visible={modal} setVisible={setModal}>
 					<TaskForm create={createTask} />
 			</MyModal>
+			<MyModal visible={editModal} setVisible={setEditModal}>
+					<EditForm changes={changes} setChanges={setChanges} onChangeHandler={onChangeHandler} />
+			</MyModal>	
 			</header>
-			<Days props={tasks} deleteTask={deleteTask} toggleTask={toggleTask} changeTask={changeTask} postponeTask={postponeTask} />
+			<Days props={tasks} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} postponeTask={postponeTask} />
 			<Results tasks={tasks}  />
 		</div>
   	);
