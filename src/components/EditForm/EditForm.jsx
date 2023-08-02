@@ -8,6 +8,7 @@ const EditForm = ({ changes, setChanges, onChangeHandler }) => {
 		}
 		onChangeHandler(newValue)
 	}
+	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Отложенные'];
 
 	return (
 		<form>
@@ -27,18 +28,23 @@ const EditForm = ({ changes, setChanges, onChangeHandler }) => {
 			/>
 			<input
 				className='addTask-input'
-				value={changes.dayForTheWeek}
-				onChange={e => setChanges({ ...changes, dayForTheWeek: e.target.value.trim() })}
-				type='text'
-				placeholder='День недели'
-			/>
-			<input
-				className='addTask-input'
 				value={changes.weight}
 				onChange={e => setChanges({ ...changes, weight: e.target.value })}
 				type='text'
 				placeholder='Ценность задачи'
 			/>
+			<select
+				value={changes.dayForTheWeek}
+				onChange={e => setChanges({ ...changes, dayForTheWeek: e.target.value })}
+			>
+				<option disabled value="">День недели</option>
+				{days.map(day =>
+					<option
+						key={Math.random()}
+						value={day}>
+						{day}
+					</option>)}
+			</select>
 			<button onClick={(e) => applyChanges(e)} >Применить</button>
 		</form>
 	);

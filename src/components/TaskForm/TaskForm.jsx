@@ -12,6 +12,9 @@ const TaskForm = ({create}) => {
 		setTask({ title: '', description: '', dayForTheWeek: '', weight: 0, isDone: false, })	
 	}
 
+	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Отложенные'];
+
+
 	return (
 		<form>
 			<input
@@ -30,18 +33,23 @@ const TaskForm = ({create}) => {
 			/>
 			<input
 				className='addTask-input'
-				value={task.dayForTheWeek}
-				onChange={e => setTask({ ...task, dayForTheWeek: e.target.value.trim() })}
-				type='text'
-				placeholder='День недели'
-			/>
-			<input
-				className='addTask-input'
 				value={task.weight}
 				onChange={e => setTask({ ...task, weight: Number(e.target.value) })}
 				type='text'
 				placeholder='Ценность задачи'
 			/>
+			<select
+				value={task.dayForTheWeek}
+				onChange={e => setTask({ ...task, dayForTheWeek: e.target.value })}
+			>
+				<option disabled value="">День недели</option>
+				{days.map(day =>
+					<option
+						key={Math.random()}
+						value={day}>
+						{day}
+					</option>)}
+			</select>
 			<button onClick={addTask}>Добавить</button>
 		</form>
 	);
