@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import './App.css'
-import Days from './components/Days/Days.jsx'
 import MyModal from "./components/MyModal/MyModal";
 import TaskForm from "./components/TaskForm/TaskForm";
 import Results from "./components/Results/Results";
 import EditForm from "./components/EditForm/EditForm";
+import TasksItem from "./components/TasksItem/TasksItem";
+import Postponed from "./components/Postponed/Postponed";
 
 function App() {
 	
@@ -37,6 +38,8 @@ function App() {
 	const [modal, setModal] = useState(false);
 	const [editModal, setEditModal] = useState(false);
 	const [changes, setChanges] = useState({ title: '', description: '', dayForTheWeek: '', weight: 0, isDone: false, });
+	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+
 	
 
 
@@ -63,7 +66,7 @@ function App() {
 
 
 	const editTask = (id) => {
-		setChanges(tasks.filter(task => task.id === id)[0])
+		setChanges(tasks.find(task => task.id === id))
 		setEditModal(true)
 	};
 
@@ -95,7 +98,15 @@ function App() {
 					<EditForm changes={changes} setChanges={setChanges} onChangeHandler={onChangeHandler} />
 			</MyModal>	
 			</header>
-			<Days props={tasks} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} postponeTask={postponeTask} />
+			<div className='week-container'>
+				{days.map(day => 
+					<div className='day-container' key={day}>
+						<div className='day'>{day}</div>
+						<TasksItem day={day} tasks={tasks} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} postponeTask={postponeTask} />
+					</div>
+				)}
+				<Postponed tasks={tasks} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} postponeTask={postponeTask} day='Отложенные'/>
+			</div>
 			<Results tasks={tasks}  />
 		</div>
   	);

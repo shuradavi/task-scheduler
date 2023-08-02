@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Postponed = ({ props, day, deleteTask, toggleTask, editTask, postponeTask }) => {
-	let tasksList = props.filter((obj) => (obj.dayForTheWeek.toLowerCase() === day.toLowerCase()));
+const Postponed = ({ tasks, day, deleteTask, toggleTask, editTask, postponeTask }) => {
+	let tasksList = tasks.filter((obj) => (obj.dayForTheWeek.toLowerCase() === day.toLowerCase()));
 	return (
 		<div className='postpone-wrapper'>
 			<div className='postpone'>{day}</div>

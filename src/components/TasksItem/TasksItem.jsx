@@ -1,8 +1,7 @@
 import React from 'react';
 
-const TasksItem = ({ tasksList, deleteTask, toggleTask, editTask, postponeTask }) => {
-
-	
+const TasksItem = ({day, tasks, deleteTask, toggleTask, editTask, postponeTask }) => {
+	let tasksList = tasks.filter((task) => (task.dayForTheWeek.toLowerCase() === day.toLowerCase()));	
 	return (
 		<>
 			{Boolean(tasksList.length) && tasksList.map((task) => (
