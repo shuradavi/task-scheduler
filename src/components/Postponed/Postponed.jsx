@@ -3,8 +3,8 @@ import React from 'react';
 const Postponed = ({ props, day, deleteTask, toggleTask, editTask, postponeTask }) => {
 	let tasksList = props.filter((obj) => (obj.dayForTheWeek.toLowerCase() === day.toLowerCase()));
 	return (
-		<div className='day-container'>
-			<div className='day'>{day}</div>
+		<div className='postpone-wrapper'>
+			<div className='postpone'>{day}</div>
 			<>
 			{Boolean(tasksList.length) && tasksList.map((task, index) => (
 				<div key={task.id} className='task'>
