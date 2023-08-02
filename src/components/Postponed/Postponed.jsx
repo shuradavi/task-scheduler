@@ -1,11 +1,12 @@
 import React from 'react';
 
-const TasksItem = ({ tasksList, deleteTask, toggleTask, editTask, postponeTask }) => {
-
-	
+const Postponed = ({ props, day, deleteTask, toggleTask, editTask, postponeTask }) => {
+	let tasksList = props.filter((obj) => (obj.dayForTheWeek.toLowerCase() === day.toLowerCase()));
 	return (
-		<>
-			{Boolean(tasksList.length) && tasksList.map((task) => (
+		<div className='day-container'>
+			<div className='day'>{day}</div>
+			<>
+			{Boolean(tasksList.length) && tasksList.map((task, index) => (
 				<div key={task.id} className='task'>
 						{task.isDone === false
 							?
@@ -27,11 +28,6 @@ const TasksItem = ({ tasksList, deleteTask, toggleTask, editTask, postponeTask }
 								Ред
 							</button>
 							<button
-								className='postpone-btn'
-								onClick={(e) => { e.stopPropagation(); postponeTask(task.id) }}
-								>Отлож.
-							</button>
-							<button
 								className='delete-btn'
 								onClick={(e) => { e.stopPropagation(); deleteTask(task) }}>
 								Удал.
@@ -41,9 +37,8 @@ const TasksItem = ({ tasksList, deleteTask, toggleTask, editTask, postponeTask }
 			))
 			}
 		</>
-		
+		</div>
 	);
 };
 
-export default TasksItem;
-	
+export default Postponed;

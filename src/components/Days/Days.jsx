@@ -1,5 +1,6 @@
 import React from 'react';
 import Day from '../Day/Day';
+import Postponed from '../Postponed/Postponed';
 
 const TasksList = ({ props, deleteTask, toggleTask, editTask, postponeTask }) => {
 
@@ -13,7 +14,7 @@ const TasksList = ({ props, deleteTask, toggleTask, editTask, postponeTask }) =>
 			<Day props={props} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} postponeTask={postponeTask} day='Пятница'/>
 			<Day props={props} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} postponeTask={postponeTask} day='Суббота'/>
 			<Day props={props} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} postponeTask={postponeTask} day='Воскресенье' />
-			<Day props={props} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} postponeTask={postponeTask} day='Отложенные' />
+			<Postponed props={props} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} postponeTask={postponeTask} day='Отложенные'/>
 		</div>
 	);
 };
