@@ -1,0 +1,2 @@
+export const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Отложенные'];
+export const initialState = { title: '', description: '', dayForTheWeek: '', weight: '', isDone: false, };

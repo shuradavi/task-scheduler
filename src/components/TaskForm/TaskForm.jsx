@@ -1,46 +1,58 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { days, initialState } from '../../initialValues';
 
-const TaskForm = ({create}) => {
-	const [task, setTask] = useState({title: '', description: '', dayForTheWeek: '', weight: '', isDone: false,})
-	
+const TaskForm = ({ create }) => {
+
+	const [task, setTask] = useState(initialState)
 	const addTask = (e) => {
-		e.preventDefault()
 		const newTask = {
 			...task, id: Date.now()
 		}
 		create(newTask);
-		setTask({ title: '', description: '', dayForTheWeek: '', weight: 0, isDone: false, })	
+		setTask(initialState)	
+	}
+	const handleInputChange = (e) => {
+		setTask((prev) => ({...prev, [e.target.name]: e.target.value}))
+	}
+	const handleInputNumberChange = (e) => {
+		let value = e.target.value;
+		if (value > 10) value = '10';
+		value = value.substr(0, 2)
+		setTask((prev) => ({...prev, [e.target.name]:  Number(value)}))
 	}
 
-	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Отложенные'];
-
-
 	return (
-		<form>
+		<>
 			<input
 				className='addTask-input'
 				value={task.title}
-				onChange={e => setTask({ ...task, title: e.target.value })}
+				name='title'
+				onChange={handleInputChange}
 				type='text'
 				placeholder='Название задачи'
 			/>
 			<input
 				className='addTask-input'
 				value={task.description}
-				onChange={e => setTask({ ...task, description: e.target.value })}
+				name='description'
+				onChange={handleInputChange}
 				type='text'
 				placeholder='Описание задачи'
 			/>
 			<input
 				className='addTask-input'
+				type='number'
 				value={task.weight}
-				onChange={e => setTask({ ...task, weight: Number(e.target.value) })}
-				type='text'
+				name='weight'
+				onChange={handleInputNumberChange}
+				min='1'
+				max='10'
 				placeholder='Ценность задачи'
 			/>
 			<select
 				value={task.dayForTheWeek}
-				onChange={e => setTask({ ...task, dayForTheWeek: e.target.value })}
+				name='dayForTheWeek'
+				onChange={handleInputChange}
 			>
 				<option disabled value="">День недели</option>
 				{days.map(day =>
@@ -51,7 +63,7 @@ const TaskForm = ({create}) => {
 					</option>)}
 			</select>
 			<button onClick={addTask}>Добавить</button>
-		</form>
+		</>
 	);
 };
 

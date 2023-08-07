@@ -43,23 +43,9 @@ header {
 	background-color: rgba(77, 77, 77, 0.459);
 }
 
-.postpone-wrapper {
-	display: flex;
-	flex-flow: column;
-	text-align: center;
-	width: 24%;
-	border: solid 1px black;
-	height: 200px;
-	margin: 10px 5px 0 5px;
+.Отложенные {
 	background-color: rgba(122, 1, 1, 0.562);
 }
-
-.postpone {
-	user-select: none;
-	border-bottom: solid 1px black;
-	background-color: rgb(95, 95, 95);
-}
-
 
 .day {
 	user-select: none;
@@ -72,6 +58,8 @@ header {
 }
 
 .task {
+	display: flex;
+	flex-wrap: wrap;
 	user-select: none;
 	margin: 5px 10px 5px 10px;
 	display: flex;
