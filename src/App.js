@@ -5,15 +5,13 @@ import TaskForm from "./components/TaskForm/TaskForm";
 import Results from "./components/Results/Results";
 import EditForm from "./components/EditForm/EditForm";
 import TasksItem from "./components/TasksItem/TasksItem";
-
+import { days } from "./initialValues";
 
 function App() {
 	
 	const [tasks, setTasks] = useState([]);
 	const [modal, setModal] = useState(false);
 	const [editedTask, setEditedTask] = useState(null);
-	const initialState = { title: '', description: '', dayForTheWeek: '', weight: '', isDone: false,  }
-	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Отложенные'];
 
 	const selectedTask = (id) => {
 		setEditedTask(tasks.find(task => task.id === id))
@@ -55,20 +53,17 @@ function App() {
 			<h1 style={{ textAlign: 'center', marginTop: '10px', fontWeight: 'normal'  }}>Список задач</h1>
 			<button className="btn_addNewTask" onClick={() => setModal(true)}>Добавить задачу</button>
 			<MyModal visible={modal} setVisible={setModal}>
-					<TaskForm create={createTask} initialState={initialState} />
+					<TaskForm create={createTask} />
 			</MyModal>
-				<MyModal visible={Boolean(editedTask)} setVisible={setEditedTask}>
-					{Boolean(editedTask)
-						?
-						<EditForm editedTask={editedTask} onChangeHandler={onChangeHandler} setEditedTask={setEditedTask} />
-						:
-						null
-					}
-			</MyModal>	
+				{Boolean(editedTask) &&
+					<MyModal visible={Boolean(editedTask)} setVisible={setEditedTask}>
+						<EditForm editedTask={editedTask} onChangeHandler={onChangeHandler} />
+					</MyModal>
+				}
 			</header>
 			<div className='week-container'>
-				{days.map((day) => 
-					<div className={'day-container ' + day } key={day}>
+				{days.map((day) =>
+					<div className={'day-container ' + day} key={day}>
 						<div className='day'>{day}</div>
 						<TasksItem day={day} tasks={tasks} editTask={editTask} deleteTask={deleteTask} toggleTask={toggleTask} postponeTask={postponeTask} selectedTask={selectedTask} />
 					</div>

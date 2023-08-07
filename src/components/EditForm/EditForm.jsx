@@ -1,34 +1,31 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { days } from '../../initialValues';
 
-const EditForm = ({ editedTask, setEditedTask, onChangeHandler }) => {
+const EditForm = ({ editedTask, onChangeHandler }) => {
 	const [editTaskValue, setEditTaskValue] = useState(editedTask);
 
 
 	const applyChanges = (e) => {
-		e.preventDefault()
 		const newValue = {
 			...editTaskValue
 		}
 		onChangeHandler(newValue)
 	}
-	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Отложенные'];
+	
 
 	const handleInputChange = (e) => {
 		setEditTaskValue((prev) => ({...prev, [e.target.name]: e.target.value}))
 	}
 	const handleInputNumberChange = (e) => {
-		//eslint-disable-next-line
-		let regexp = /[a-zа-яё.,_?\[\/\\\|\{\}\[\]!@#$%^&*\(\)-+'";:~`<>]/gi;
 		let value = e.target.value;
-		value = value.replace(regexp, '')
 		if (value > 10) value = '10';
 		value = value.substr(0, 2)
-		setEditTaskValue((prev) => ({...prev, [e.target.name]: Number(value)}))
+		setEditTaskValue((prev) => ({...prev, [e.target.name]:  Number(value)}))
 	}
 
 
 	return (
-		<form>
+		<>
 			<input
 				className='addTask-input'
 				value={editTaskValue.title}
@@ -50,7 +47,9 @@ const EditForm = ({ editedTask, setEditedTask, onChangeHandler }) => {
 				value={editTaskValue.weight}
 				name='weight'
 				onChange={handleInputNumberChange}
-				type='text'
+				type='number'
+				min='1'
+				max='10'
 				placeholder='Ценность задачи'
 			/>
 			<select
@@ -67,7 +66,7 @@ const EditForm = ({ editedTask, setEditedTask, onChangeHandler }) => {
 					</option>)}
 			</select>
 			<button onClick={(e) => applyChanges(e)} >Применить</button>
-		</form>
+		</>
 	);
 };
 

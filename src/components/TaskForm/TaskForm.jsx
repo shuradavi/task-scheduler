@@ -1,32 +1,28 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { days, initialState } from '../../initialValues';
 
-const TaskForm = ({create, initialState}) => {
+const TaskForm = ({ create }) => {
+
 	const [task, setTask] = useState(initialState)
 	const addTask = (e) => {
-		e.preventDefault()
 		const newTask = {
 			...task, id: Date.now()
 		}
 		create(newTask);
 		setTask(initialState)	
 	}
-
-	const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Отложенные'];
 	const handleInputChange = (e) => {
 		setTask((prev) => ({...prev, [e.target.name]: e.target.value}))
 	}
 	const handleInputNumberChange = (e) => {
-		//eslint-disable-next-line
-		let regexp = /[a-zа-яё.,_?\[\/\\\|\{\}\[\]!@#$%^&*\(\)-+'";:~`<>]/gi;
 		let value = e.target.value;
-		value = value.replace(regexp, '')
 		if (value > 10) value = '10';
 		value = value.substr(0, 2)
 		setTask((prev) => ({...prev, [e.target.name]:  Number(value)}))
 	}
 
 	return (
-		<form>
+		<>
 			<input
 				className='addTask-input'
 				value={task.title}
@@ -45,10 +41,12 @@ const TaskForm = ({create, initialState}) => {
 			/>
 			<input
 				className='addTask-input'
+				type='number'
 				value={task.weight}
 				name='weight'
 				onChange={handleInputNumberChange}
-				type='text'
+				min='1'
+				max='10'
 				placeholder='Ценность задачи'
 			/>
 			<select
@@ -65,7 +63,7 @@ const TaskForm = ({create, initialState}) => {
 					</option>)}
 			</select>
 			<button onClick={addTask}>Добавить</button>
-		</form>
+		</>
 	);
 };
 
